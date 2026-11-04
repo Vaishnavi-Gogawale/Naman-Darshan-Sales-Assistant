@@ -10,6 +10,7 @@
 #   "Which Jyotirlinga should I visit first?" → RAG retrieves Jyotirlinga guide
 #   "Which temple is good in monsoon?"      → RAG retrieves monsoon guide
 
+import os
 from langchain_groq import ChatGroq
 from config import GROQ_API_KEY, MONGO_URI
 from pymongo import MongoClient
@@ -109,6 +110,10 @@ def _retrieve_seasonal_context(query: str) -> str:
     This is the key fix — the vectorstore has month-by-month seasonal guides,
     state-wise regional guides, accessibility guides, etc.
     """
+    # Render pe DISABLE_FAISS = 1 hai to FAISS load hi mat karo, seedha halka wala context de do
+    if os.getenv("DISABLE_FAISS") == "1":
+        return _get_fallback_context(query)
+
     try:
         from retriever import retrieve_docs
 
@@ -122,7 +127,6 @@ def _retrieve_seasonal_context(query: str) -> str:
     except Exception as e:
         print(f"[recommendation_engine] RAG retrieval error: {e}")
         return _get_fallback_context(query)
-
 
 def _enrich_query(query: str) -> str:
     """
