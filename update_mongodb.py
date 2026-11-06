@@ -12,7 +12,7 @@ Updates:
 from pymongo import MongoClient, ReplaceOne
 from datetime import datetime
 
-MONGO_URI = "mongodb+srv://ayush:strongpassword123@sales-ai-backend.gofnxnk.mongodb.net/"
+MONGO_URI = "mongodb+srv://vaishnavigogawle_db_user:49KtpW1B0wWJ76w1@cluster0.bc4qcts.mongodb.net/"
 DB_NAME   = "temples_clone"
 
 client = MongoClient(

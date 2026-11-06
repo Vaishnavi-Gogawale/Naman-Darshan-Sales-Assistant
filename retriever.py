@@ -1,53 +1,41 @@
 import os
+import streamlit as st
 from langchain_huggingface import HuggingFaceEmbeddings
 from langchain_community.vectorstores import FAISS
 
-embedding_model = HuggingFaceEmbeddings(
-    model_name="sentence-transformers/paraphrase-MiniLM-L3-v2"
-)
-
-# Auto-build vectorstore if it doesn't exist (e.g. first run on HF Spaces)
-if not os.path.exists("vectorstore/index.faiss"):
-    print("⚙️ Vectorstore not found. Building from scratch...")
-    import embedder  # runs the full embed + save pipeline
-    print("✅ Vectorstore built successfully.")
-
-vectorstore = FAISS.load_local(
-    "vectorstore",
-    embedding_model,
-    allow_dangerous_deserialization=True
-)
-
-
-# ----------------------------------------
-# RETRIEVE DOCS
-# ----------------------------------------
-
-def retrieve_docs(query):
-
-    docs = vectorstore.max_marginal_relevance_search(
-
-        query,
-
-        k=3,
-
-        fetch_k=10
+@st.cache_resource
+def get_vectorstore():
+    embedding_model = HuggingFaceEmbeddings(
+        model_name="sentence-transformers/paraphrase-MiniLM-L3-v2"
     )
 
+    if not os.path.exists("vectorstore/index.faiss"):
+        print("⚙️ Vectorstore not found. Building from scratch...")
+        from embedder import build_vectorstore
+        build_vectorstore()  # <- ye call karna zaruri tha
+        print("✅ Vectorstore built successfully.")
+
+    vectorstore = FAISS.load_local(
+        "vectorstore",
+        embedding_model,
+        allow_dangerous_deserialization=True
+    )
+    return vectorstore
+
+def retrieve_docs(query):
+    try:
+        vectorstore = get_vectorstore()
+        docs = vectorstore.max_marginal_relevance_search(query, k=3, fetch_k=10)
+    except Exception as e:
+        print(f"[retriever] Vectorstore load failed: {e}")
+        return ""
+
     unique_docs = []
-
     seen = set()
-
     for doc in docs:
-
         content = doc.page_content.strip()
-
-        if content not in seen:
-
+        if content and content not in seen:
             seen.add(content)
-
             unique_docs.append(content)
 
-    context = "\n".join(unique_docs[:3])
-
-    return context
+    return "\n".join(unique_docs[:3])

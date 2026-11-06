@@ -1,35 +1,35 @@
 # embedder.py
-
 from langchain_text_splitters import RecursiveCharacterTextSplitter
 from langchain_community.vectorstores import FAISS
 from langchain_huggingface import HuggingFaceEmbeddings
-
-# Import the data loader we wrote earlier
 from data_loader import load_data
 
-# 1. Load raw text data from MongoDB Atlas
-texts = load_data()
+def build_vectorstore():
+    print("📥 Loading data from MongoDB...")
+    texts = load_data()
+    print(f"📄 Got {len(texts)} texts from MongoDB")
 
-# 2. Chunk the data into smaller pieces
-splitter = RecursiveCharacterTextSplitter(
-    chunk_size=500,
-    chunk_overlap=50
-)
+    if not texts or len(texts) == 0:
+        print("❌ STOP: MongoDB se 0 texts aaye. FAISS nahi bana raha.")
+        print("👉 Pehle data_loader.py / Atlas me collection name check karo.")
+        return None
 
-docs = splitter.create_documents(texts)
+    splitter = RecursiveCharacterTextSplitter(
+        chunk_size=500,
+        chunk_overlap=50
+    )
+    docs = splitter.create_documents(texts)
+    print(f"✂️ Made {len(docs)} chunks")
 
-# 3. Initialize the embedding model
-embedding_model = HuggingFaceEmbeddings(
-    model_name="sentence-transformers/paraphrase-MiniLM-L3-v2"
-)
+    embedding_model = HuggingFaceEmbeddings(
+        model_name="sentence-transformers/paraphrase-MiniLM-L3-v2"
+    )
 
-# 4. Build FAISS index from documents
-vectorstore = FAISS.from_documents(
-    docs,
-    embedding_model
-)
+    vectorstore = FAISS.from_documents(docs, embedding_model)
+    vectorstore.save_local("vectorstore")
+    print(f"✅ Successfully built FAISS index with {len(docs)} chunks.")
+    return vectorstore
 
-# 5. Save FAISS index locally
-vectorstore.save_local("vectorstore")
-
-print(f"✅ Successfully built FAISS index with {len(docs)} chunks.")
+# Ye line sabse important hai - import karne pe code nahi chalega
+if __name__ == "__main__":
+    build_vectorstore()
