@@ -975,13 +975,17 @@ Rephrase {lead_capture_cta} to flow naturally from your greeting. Max 50 words.
 """
 
     if intent == "PHONE_CAPTURED":
+    # Phone nikalna - taaki "phone is not defined" error na aaye
+        import re
+        phone_match = re.search(r'\b\d{10}\b', str(user_input))
+        phone = phone_match.group(0) if phone_match else "their phone number"
+    
         return f"""
 The user has provided their phone number ({phone}).
 Warmly thank them and confirm that we have everything we need.
 State that once the required details are provided, we can help them proceed with the booking process.
 Wish them a {blessed_term}. Max 50 words.
 """
-
     # ------------------------------------------------------------------
     # PAYMENT_CONFIRM — user has agreed to pay, payment link is ready
     # ------------------------------------------------------------------
