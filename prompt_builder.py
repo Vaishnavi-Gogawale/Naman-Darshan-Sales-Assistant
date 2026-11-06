@@ -975,10 +975,12 @@ Rephrase {lead_capture_cta} to flow naturally from your greeting. Max 50 words.
 """
 
     if intent == "PHONE_CAPTURED":
-    # Phone nikalna - taaki "phone is not defined" error na aaye
-        import re
-        phone_match = re.search(r'\b\d{10}\b', str(user_input))
-        phone = phone_match.group(0) if phone_match else "their phone number"
+    # Phone booking_data se lena hai, user_input se nahi
+        phone = ""
+    if isinstance(booking_data, dict):
+        phone = booking_data.get("phone") or booking_data.get("phone_number") or ""
+    if not phone:
+        phone = "their phone number"
     
         return f"""
 The user has provided their phone number ({phone}).
