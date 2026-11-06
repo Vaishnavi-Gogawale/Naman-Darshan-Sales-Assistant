@@ -4,3 +4,4 @@ myenv/
 db_dump.txt
 vectorstore/
 db_dump.txt
+update_mongodb.py
