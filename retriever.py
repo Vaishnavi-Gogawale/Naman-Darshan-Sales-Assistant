@@ -48,6 +48,6 @@ def retrieve_docs(query):
 
             unique_docs.append(content)
 
-    context = "\n".join(unique_docs)
+    context = "\n".join(unique_docs[:3])
 
     return context

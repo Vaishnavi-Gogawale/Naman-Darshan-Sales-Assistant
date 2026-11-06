@@ -1306,13 +1306,18 @@ Payment Asked    : {payment_asked_val}
 
     # ---- Language instruction (English only) ----
     lang_instruction = (
-        "ALWAYS respond in English only. Do NOT use Hinglish, Hindi words, or any non-English words.\n"
-        "Every single word in your response must be plain English.\n"
-        "Rules:\n"
-        "- No Hinglish. No Hindi. No mixed-language. English only.\n"
-        "- Keep the response concise and natural.\n"
-        "- NEVER open with 'Your concern is valid' or similar UNLESS the user has explicitly raised a concern or objection."
-    )
+    "Respond in the same language style used by the customer.\n"
+    "\n"
+    "Language Rules:\n"
+    "- If the user writes in English, reply in English.\n"
+    "- If the user writes in Hinglish, reply in Hinglish.\n"
+    "- If the user mixes Hindi and English, naturally use Hinglish.\n"
+    "- Match the customer's language automatically.\n"
+    "- Do not force English.\n"
+    "- Do not force Hindi.\n"
+    "- Keep responses professional, devotional, respectful and natural.\n"
+    "- NEVER open with 'Your concern is valid' unless the user has explicitly raised a concern or objection."
+)
 
     # ---- Social proof directive ----
     social_proof_used = booking_data.get("social_proof_used", False)
