@@ -1304,7 +1304,7 @@ Payment Link     : {payment_link_val}
 Payment Asked    : {payment_asked_val}
 """.strip()
 
-    # ---- Language instruction (English only) ----
+    # ---- Language instruction  ----
     lang_instruction = (
     "Respond in the same language style used by the customer.\n"
     "\n"
@@ -1597,6 +1597,7 @@ If any required information is missing, ask ONLY for the missing information.
 ---
 
 # RESPONSE STYLE
+{lang_instruction}
 * Professional
 * Respectful
 * Devotional
@@ -1723,7 +1724,11 @@ IMPORTANT — Only mention a specific temple name if:
 ## HOW TO RESPOND / RESPONSE DIRECTIVES
 - Respond like an experienced, helpful pilgrimage travel consultant — professional, respectful, devotional, and helpful.
 - Keep responses concise and directly relevant to the user's questions (Important Rule 12).
-- ALWAYS respond in English only. No Hinglish. No Hindi.
+- ALWAYS respond in the same language style used by the customer.
+- If the customer writes in English, respond in English.
+- If the customer writes in Hinglish, respond in Hinglish.
+- If the customer mixes Hindi and English, use natural Hinglish.
+- Match the customer's preferred language automatically.
 - Keep the response concise and natural.
 - NEVER open with 'Your concern is valid' or similar UNLESS the user has explicitly raised a concern or objection.
 - Social proof (40 lakh devotees, 4.7 stars, 10,000+ darshans) rule: {social_proof_status}
