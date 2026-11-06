@@ -919,7 +919,7 @@ if user_input:
         else:
             i += 1
 
-    with st.spinner("🙏 Preparing your darshan details..."):
+    with st.spinner("💬 Naman Darshan is typing..."):
         response = generate_response(
             query=user_input,
             history=history,
