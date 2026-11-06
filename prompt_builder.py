@@ -1308,15 +1308,15 @@ Payment Asked    : {payment_asked_val}
     lang_instruction = (
     "Respond in the same language style used by the customer.\n"
     "\n"
-    "Language Rules:\n"
-    "- If the user writes in English, reply in English.\n"
-    "- If the user writes in Hinglish, reply in Hinglish.\n"
-    "- If the user mixes Hindi and English, naturally use Hinglish.\n"
-    "- Match the customer's language automatically.\n"
-    "- Do not force English.\n"
-    "- Do not force Hindi.\n"
-    "- Keep responses professional, devotional, respectful and natural.\n"
-    "- NEVER open with 'Your concern is valid' unless the user has explicitly raised a concern or objection."
+    "IMPORTANT LANGUAGE RULES:\n"
+    "- If customer writes in English, reply in English.\n"
+    "- If customer writes in Hinglish, reply in Hinglish.\n"
+    "- Hinglish means Hindi written ONLY using English letters.\n"
+    "- NEVER use Hindi Devanagari script characters.\n"
+    "- NEVER use characters such as: अ आ इ ई उ ऊ ए ऐ ओ औ क ख ग घ च छ ज झ ट ठ ड ढ त थ द ध न प फ ब भ म य र ल व श ष स ह.\n"
+    "- Use only English alphabet characters.\n"
+    "- Example Hinglish: 'Aap kaise hain?', 'Main aapki madad kar sakta hoon'.\n"
+    "- Do not write Hindi in Hindi font.\n"
 )
 
     # ---- Social proof directive ----
@@ -1724,11 +1724,11 @@ IMPORTANT — Only mention a specific temple name if:
 ## HOW TO RESPOND / RESPONSE DIRECTIVES
 - Respond like an experienced, helpful pilgrimage travel consultant — professional, respectful, devotional, and helpful.
 - Keep responses concise and directly relevant to the user's questions (Important Rule 12).
-- ALWAYS respond in the same language style used by the customer.
-- If the customer writes in English, respond in English.
-- If the customer writes in Hinglish, respond in Hinglish.
-- If the customer mixes Hindi and English, use natural Hinglish.
-- Match the customer's preferred language automatically.
+- Respond in the same language style used by the customer.
+- If user writes in English, answer in English.
+- If user writes in Hinglish, answer in Hinglish.
+- Hinglish must use ONLY English letters.
+- Never output Hindi Devanagari script.
 - Keep the response concise and natural.
 - NEVER open with 'Your concern is valid' or similar UNLESS the user has explicitly raised a concern or objection.
 - Social proof (40 lakh devotees, 4.7 stars, 10,000+ darshans) rule: {social_proof_status}
