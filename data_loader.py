@@ -27,10 +27,8 @@ logger = logging.getLogger(__name__)
 # Mongo connection
 # ---------------------------------------------------------------------------
 
-MONGO_URI = os.getenv(
-    "MONGO_URI",
-    "mongodb+srv://ayush:strongpassword123@sales-ai-backend.gofnxnk.mongodb.net/"
-)
+
+MONGO_URI = os.getenv("MONGO_URI")
 DB_NAME = "temples_clone"
 
 # ---------------------------------------------------------------------------

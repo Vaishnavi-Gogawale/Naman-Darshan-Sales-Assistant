@@ -8,11 +8,12 @@ Updates:
   1. objections collection — full PDF objection handling scripts
   2. company_info collection — Traininglobe / Naman Darshan identity
 """
-
+import os
+from dotenv import load_dotenv
 from pymongo import MongoClient, ReplaceOne
 from datetime import datetime
 
-MONGO_URI = "mongodb+srv://vaishnavigogawle_db_user:49KtpW1B0wWJ76w1@cluster0.bc4qcts.mongodb.net/"
+MONGO_URI = os.getenv("MONGO_URI")
 DB_NAME   = "temples_clone"
 
 client = MongoClient(

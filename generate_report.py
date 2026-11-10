@@ -245,7 +245,7 @@ story.append(Paragraph("4. MongoDB Atlas Changes", H1))
 story.append(HRFlowable(width="100%", thickness=0.5, color=MID_GREY, spaceAfter=8))
 
 story.append(Paragraph(
-    f"Connection: {code('mongodb+srv://ayush:strongpassword123@sales-ai-backend.gofnxnk.mongodb.net/')}<br/>"
+    f"Connection: {code('mongodb+srv://[REDACTED]')}<br/>"
     f"Database: {code('temples_clone')}", BODY))
 
 mongo_data = [

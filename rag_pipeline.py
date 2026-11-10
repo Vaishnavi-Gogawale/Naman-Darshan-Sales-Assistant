@@ -767,8 +767,8 @@ def _load_temples_from_mongo():
         {"name": "Kamakhya Temple",           "location": "Guwahati, Assam"},
     ]
     try:
-        mongo_uri = os.getenv("MONGO_URI") or "mongodb+srv://ayush:strongpassword123@sales-ai-backend.gofnxnk.mongodb.net/"
-        client = MongoClient(mongo_uri, serverSelectionTimeoutMS=5000)
+        MONGO_URI = os.getenv("MONGO_URI") 
+        client = MongoClient(MONGO_URI, serverSelectionTimeoutMS=5000)
         db = client["temples_clone"]
 
         seen = set()
@@ -838,8 +838,8 @@ def _load_pujas_from_mongo():
         "Shri Krishna Puja",
     ]
     try:
-        mongo_uri = os.getenv("MONGO_URI") or "mongodb+srv://ayush:strongpassword123@sales-ai-backend.gofnxnk.mongodb.net/"
-        client = MongoClient(mongo_uri, serverSelectionTimeoutMS=5000)
+        MONGO_URI = os.getenv("MONGO_URI")
+        client = MongoClient(MONGO_URI, serverSelectionTimeoutMS=5000)
         db = client["temples_clone"]
         results = []
         for doc in db.pujas.find({}, {"title": 1, "_id": 0}):
